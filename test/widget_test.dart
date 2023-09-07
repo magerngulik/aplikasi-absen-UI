@@ -7,22 +7,34 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:logger/logger.dart';
+import 'package:new_attandance/src/presentation/auth/bloc/auth/auth_bloc.dart';
+import 'package:new_attandance/src/presentation/auth/data/auth_service.dart';
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    // await tester.pumpWidget(const MyApp());
+void main() async {
+  var log = Logger();
+  var services = AuthServices();
+  var data =
+      await services.doLogin(email: "admin@admin.com", password: "password");
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  data.fold((l) {
+    log.e("gagal login = $l");
+  }, (r) {
+    log.d(r);
   });
+
+  // var dataRegister = await services.doRegister(
+  //     name: "Andi",
+  //     email: "Andi1@gmail.com",
+  //     password: "password",
+  //     tanggalLahir: "2022-01-12",
+  //     alamat: "Jalan Kutilang",
+  //     nomorTelp: "08124554554");
+
+  // dataRegister.fold((l) {
+  //   log.e(l);
+  //   debugPrint(l);
+  // }, (r) {
+  //   log.d(r);
+  // });
 }

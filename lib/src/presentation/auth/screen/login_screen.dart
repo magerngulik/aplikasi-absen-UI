@@ -2,8 +2,12 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:new_attandance/src/presentation/auth/widget/q_textfield_login.dart';
+import 'package:new_attandance/src/presentation/home/screen/home_screen.dart';
+
+import '../bloc/auth/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  var auth = AuthBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 15.0,
           ),
-          QButtonAuth(h: h, title: "Login", onPress: () {}),
+          QButtonAuth(
+              h: h,
+              title: "Login",
+              onPress: () {
+                debugPrint("email =>${email.text}");
+                debugPrint("password =>${password.text}");
+              }),
           const Spacer(),
           QButtonAcccess(
             title: "Belum punya akun?",

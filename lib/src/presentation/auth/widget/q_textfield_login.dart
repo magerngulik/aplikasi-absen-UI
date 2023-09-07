@@ -32,6 +32,7 @@ class QTextfieldAuth extends StatelessWidget {
             height: 5.0,
           ),
           TextFormField(
+            controller: controller,
             initialValue: null,
             decoration: InputDecoration(
                 contentPadding:

@@ -43,6 +43,7 @@ dependencies:
   logger: ^2.0.2
   device_info_plus: ^9.0.3
   geolocator: ^10.0.1
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:
