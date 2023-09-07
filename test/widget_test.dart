@@ -5,10 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart';
-import 'package:new_attandance/src/presentation/auth/bloc/auth/auth_bloc.dart';
 import 'package:new_attandance/src/presentation/auth/data/auth_service.dart';
 
 void main() async {

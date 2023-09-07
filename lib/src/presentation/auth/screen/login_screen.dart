@@ -19,83 +19,142 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  var auth = AuthBloc();
 
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     // var w = MediaQuery.of(context).size.width;
+    var auth = context.read<AuthBloc>();
 
-    return Scaffold(
-        body: Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 30.0,
+    return BlocListener<AuthBloc, AuthState>(
+      bloc: auth,
+      listener: (context, state) {
+        state.maybeWhen(
+          orElse: () {},
+          authenticate: (name, email, profile) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           ),
-          QHeadLogo(h: h, title: "Selamat Datang Kembali"),
-          const SizedBox(
-            height: 30.0,
-          ),
-          QTextfieldAuth(
-            controller: email,
-            hint: "Masukan email anda",
-            title: "Email",
-            isUseIcon: false,
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          QTextfieldAuth(
-            controller: password,
-            hint: "Masukan password anda",
-            title: "Password",
-            isUseIcon: true,
-            icon: Icons.remove_red_eye,
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "Lupa Password?",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.green,
+          failed: (errorMessage) async {
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Info'),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                        Text(errorMessage),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  actions: <Widget>[
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("Ok"),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
+      child: Scaffold(
+          body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30.0,
             ),
-          ),
-          const SizedBox(
-            height: 15.0,
-          ),
-          QButtonAuth(
-              h: h,
-              title: "Login",
-              onPress: () {
-                debugPrint("email =>${email.text}");
-                debugPrint("password =>${password.text}");
-              }),
-          const Spacer(),
-          QButtonAcccess(
-            title: "Belum punya akun?",
-            head: "Register",
-            onPress: () {},
-          ),
-          const SizedBox(
-            height: 50.0,
-          ),
-        ],
-      ),
-    ));
+            QHeadLogo(h: h, title: "Selamat Datang Kembali"),
+            const SizedBox(
+              height: 30.0,
+            ),
+            QTextfieldAuth(
+              controller: email,
+              hint: "Masukan email anda",
+              title: "Email",
+              isUseIcon: false,
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            QTextfieldAuth(
+              controller: password,
+              hint: "Masukan password anda",
+              title: "Password",
+              isUseIcon: true,
+              icon: Icons.remove_red_eye,
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Lupa Password?",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            BlocBuilder<AuthBloc, AuthState>(
+              bloc: auth,
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () {
+                    return QButtonAuth(
+                      h: h,
+                      title: "Login",
+                      onPress: () {
+                        debugPrint("email =>${email.text}");
+                        debugPrint("password =>${password.text}");
+                        auth.add(AuthEvent.login(
+                            email: email.text, password: password.text));
+                      },
+                    );
+                  },
+                  loading: () {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+            const Spacer(),
+            QButtonAcccess(
+              title: "Belum punya akun?",
+              head: "Register",
+              onPress: () {},
+            ),
+            const SizedBox(
+              height: 50.0,
+            ),
+          ],
+        ),
+      )),
+    );
   }
 }
 
