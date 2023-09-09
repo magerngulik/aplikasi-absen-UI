@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:new_attandance/src/presentation/auth/widget/q_textfield_login.dart';
 import 'package:new_attandance/src/presentation/home/screen/home_screen.dart';
+import 'package:new_attandance/src/shared/bloc/theme/theme_cubit.dart';
 
 import '../bloc/auth/auth_bloc.dart';
 
@@ -65,95 +66,105 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
       child: Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.light),
+                onPressed: () {
+                  context.read<ThemeCubit>().changeTheme();
+                },
+              )
+            ],
+          ),
           body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 30.0,
-            ),
-            QHeadLogo(h: h, title: "Selamat Datang Kembali"),
-            const SizedBox(
-              height: 30.0,
-            ),
-            QTextfieldAuth(
-              controller: email,
-              hint: "Masukan email anda",
-              title: "Email",
-              isUseIcon: false,
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            QTextfieldAuth(
-              controller: password,
-              hint: "Masukan password anda",
-              title: "Password",
-              isUseIcon: true,
-              icon: Icons.remove_red_eye,
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Lupa Password?",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.green,
-                    ),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30.0,
+                ),
+                QHeadLogo(h: h, title: "Selamat Datang Kembali"),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                QTextfieldAuth(
+                  controller: email,
+                  hint: "Masukan email anda",
+                  title: "Email",
+                  isUseIcon: false,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                QTextfieldAuth(
+                  controller: password,
+                  hint: "Masukan password anda",
+                  title: "Password",
+                  isUseIcon: true,
+                  icon: Icons.remove_red_eye,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Lupa Password?",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 15.0,
-            ),
-            BlocBuilder<AuthBloc, AuthState>(
-              bloc: auth,
-              builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () {
-                    return QButtonAuth(
-                      h: h,
-                      title: "Login",
-                      onPress: () {
-                        debugPrint("email =>${email.text}");
-                        debugPrint("password =>${password.text}");
-                        auth.add(AuthEvent.login(
-                            email: email.text, password: password.text));
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                BlocBuilder<AuthBloc, AuthState>(
+                  bloc: auth,
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return QButtonAuth(
+                          h: h,
+                          title: "Login",
+                          onPress: () {
+                            debugPrint("email =>${email.text}");
+                            debugPrint("password =>${password.text}");
+                            auth.add(AuthEvent.login(
+                                email: email.text, password: password.text));
+                          },
+                        );
+                      },
+                      loading: () {
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
                       },
                     );
                   },
-                  loading: () {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  },
-                );
-              },
+                ),
+                const Spacer(),
+                QButtonAcccess(
+                  title: "Belum punya akun?",
+                  head: "Register",
+                  onPress: () {},
+                ),
+                const SizedBox(
+                  height: 50.0,
+                ),
+              ],
             ),
-            const Spacer(),
-            QButtonAcccess(
-              title: "Belum punya akun?",
-              head: "Register",
-              onPress: () {},
-            ),
-            const SizedBox(
-              height: 50.0,
-            ),
-          ],
-        ),
-      )),
+          )),
     );
   }
 }

@@ -31,7 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             AuthState.authenticate(name: name, email: email, profile: profile));
       });
     });
-    
+
     on<_Logout>((event, emit) {
       emit(const AuthState.loading());
       Future.delayed(const Duration(seconds: 3));
