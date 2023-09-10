@@ -38,7 +38,6 @@ class QTextfieldAuth extends StatelessWidget {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                 filled: true,
-                fillColor: Colors.white,
                 hintText: hint,
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),

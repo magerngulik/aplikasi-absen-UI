@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   Bloc.observer = MyBlocObserver();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
   runApp(MultiBlocProvider(
     providers: [
@@ -17,7 +18,7 @@ void main() async {
         create: (context) => AuthBloc(),
       ),
       BlocProvider(
-        create: (context) => ThemeCubit(),
+        create: (context) => ThemeCubit(prefs: prefs),
       )
     ],
     child: const MyApp(),

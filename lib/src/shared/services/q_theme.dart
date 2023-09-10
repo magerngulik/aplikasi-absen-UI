@@ -2,5 +2,6 @@ import 'package:flutter/material.dart';
 
 class QTheme {
   static var isDark = ThemeData.dark();
-  static var isLight = ThemeData.light();
+  static var isLight = ThemeData.light()
+      .copyWith(colorScheme: ColorScheme.fromSeed(seedColor: Colors.green));
 }

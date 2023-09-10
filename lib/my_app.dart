@@ -4,8 +4,19 @@ import 'package:new_attandance/src/presentation/auth/screen/login_screen.dart';
 import 'package:new_attandance/src/shared/bloc/theme/theme_cubit.dart';
 import 'package:new_attandance/src/shared/services/q_theme.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ThemeCubit>().cekTheme();
+  }
 
   @override
   Widget build(BuildContext context) {

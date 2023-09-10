@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:new_attandance/src/presentation/auth/screen/login_screen.dart';
+import 'package:new_attandance/src/presentation/auth/widget/q_button_access.dart';
+import 'package:new_attandance/src/presentation/auth/widget/q_button_auth.dart';
+import 'package:new_attandance/src/presentation/auth/widget/q_headLogo.dart';
 import 'package:new_attandance/src/presentation/auth/widget/q_textfield_login.dart';
 
 class RegisterScreens extends StatefulWidget {
