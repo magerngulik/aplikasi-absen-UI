@@ -27,7 +27,7 @@ class QButtonAcccess extends StatelessWidget {
           width: 5.0,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () => onPress(),
           child: Text(
             head,
             style: const TextStyle(

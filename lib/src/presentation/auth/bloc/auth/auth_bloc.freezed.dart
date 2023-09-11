@@ -21,6 +21,9 @@ mixin _$AuthEvent {
     required TResult Function() started,
     required TResult Function(String email, String password) login,
     required TResult Function() logout,
+    required TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)
+        register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +31,9 @@ mixin _$AuthEvent {
     TResult? Function()? started,
     TResult? Function(String email, String password)? login,
     TResult? Function()? logout,
+    TResult? Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +41,9 @@ mixin _$AuthEvent {
     TResult Function()? started,
     TResult Function(String email, String password)? login,
     TResult Function()? logout,
+    TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +52,7 @@ mixin _$AuthEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_Register value) register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +60,7 @@ mixin _$AuthEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_Register value)? register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +68,7 @@ mixin _$AuthEvent {
     TResult Function(_Started value)? started,
     TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
+    TResult Function(_Register value)? register,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +131,9 @@ class _$_Started implements _Started {
     required TResult Function() started,
     required TResult Function(String email, String password) login,
     required TResult Function() logout,
+    required TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)
+        register,
   }) {
     return started();
   }
@@ -129,6 +144,9 @@ class _$_Started implements _Started {
     TResult? Function()? started,
     TResult? Function(String email, String password)? login,
     TResult? Function()? logout,
+    TResult? Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
   }) {
     return started?.call();
   }
@@ -139,6 +157,9 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(String email, String password)? login,
     TResult Function()? logout,
+    TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -153,6 +174,7 @@ class _$_Started implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_Register value) register,
   }) {
     return started(this);
   }
@@ -163,6 +185,7 @@ class _$_Started implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_Register value)? register,
   }) {
     return started?.call(this);
   }
@@ -173,6 +196,7 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
+    TResult Function(_Register value)? register,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -260,6 +284,9 @@ class _$_Login implements _Login {
     required TResult Function() started,
     required TResult Function(String email, String password) login,
     required TResult Function() logout,
+    required TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)
+        register,
   }) {
     return login(email, password);
   }
@@ -270,6 +297,9 @@ class _$_Login implements _Login {
     TResult? Function()? started,
     TResult? Function(String email, String password)? login,
     TResult? Function()? logout,
+    TResult? Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
   }) {
     return login?.call(email, password);
   }
@@ -280,6 +310,9 @@ class _$_Login implements _Login {
     TResult Function()? started,
     TResult Function(String email, String password)? login,
     TResult Function()? logout,
+    TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -294,6 +327,7 @@ class _$_Login implements _Login {
     required TResult Function(_Started value) started,
     required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_Register value) register,
   }) {
     return login(this);
   }
@@ -304,6 +338,7 @@ class _$_Login implements _Login {
     TResult? Function(_Started value)? started,
     TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_Register value)? register,
   }) {
     return login?.call(this);
   }
@@ -314,6 +349,7 @@ class _$_Login implements _Login {
     TResult Function(_Started value)? started,
     TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
+    TResult Function(_Register value)? register,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -373,6 +409,9 @@ class _$_Logout implements _Logout {
     required TResult Function() started,
     required TResult Function(String email, String password) login,
     required TResult Function() logout,
+    required TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)
+        register,
   }) {
     return logout();
   }
@@ -383,6 +422,9 @@ class _$_Logout implements _Logout {
     TResult? Function()? started,
     TResult? Function(String email, String password)? login,
     TResult? Function()? logout,
+    TResult? Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
   }) {
     return logout?.call();
   }
@@ -393,6 +435,9 @@ class _$_Logout implements _Logout {
     TResult Function()? started,
     TResult Function(String email, String password)? login,
     TResult Function()? logout,
+    TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -407,6 +452,7 @@ class _$_Logout implements _Logout {
     required TResult Function(_Started value) started,
     required TResult Function(_Login value) login,
     required TResult Function(_Logout value) logout,
+    required TResult Function(_Register value) register,
   }) {
     return logout(this);
   }
@@ -417,6 +463,7 @@ class _$_Logout implements _Logout {
     TResult? Function(_Started value)? started,
     TResult? Function(_Login value)? login,
     TResult? Function(_Logout value)? logout,
+    TResult? Function(_Register value)? register,
   }) {
     return logout?.call(this);
   }
@@ -427,6 +474,7 @@ class _$_Logout implements _Logout {
     TResult Function(_Started value)? started,
     TResult Function(_Login value)? login,
     TResult Function(_Logout value)? logout,
+    TResult Function(_Register value)? register,
     required TResult orElse(),
   }) {
     if (logout != null) {
@@ -441,6 +489,224 @@ abstract class _Logout implements AuthEvent {
 }
 
 /// @nodoc
+abstract class _$$_RegisterCopyWith<$Res> {
+  factory _$$_RegisterCopyWith(
+          _$_Register value, $Res Function(_$_Register) then) =
+      __$$_RegisterCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String username,
+      String email,
+      String password,
+      String address,
+      String birtdays,
+      String noTelp});
+}
+
+/// @nodoc
+class __$$_RegisterCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_Register>
+    implements _$$_RegisterCopyWith<$Res> {
+  __$$_RegisterCopyWithImpl(
+      _$_Register _value, $Res Function(_$_Register) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? username = null,
+    Object? email = null,
+    Object? password = null,
+    Object? address = null,
+    Object? birtdays = null,
+    Object? noTelp = null,
+  }) {
+    return _then(_$_Register(
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      birtdays: null == birtdays
+          ? _value.birtdays
+          : birtdays // ignore: cast_nullable_to_non_nullable
+              as String,
+      noTelp: null == noTelp
+          ? _value.noTelp
+          : noTelp // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Register implements _Register {
+  const _$_Register(
+      {required this.username,
+      required this.email,
+      required this.password,
+      required this.address,
+      required this.birtdays,
+      required this.noTelp});
+
+  @override
+  final String username;
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  final String address;
+  @override
+  final String birtdays;
+  @override
+  final String noTelp;
+
+  @override
+  String toString() {
+    return 'AuthEvent.register(username: $username, email: $email, password: $password, address: $address, birtdays: $birtdays, noTelp: $noTelp)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Register &&
+            (identical(other.username, username) ||
+                other.username == username) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.birtdays, birtdays) ||
+                other.birtdays == birtdays) &&
+            (identical(other.noTelp, noTelp) || other.noTelp == noTelp));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, username, email, password, address, birtdays, noTelp);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RegisterCopyWith<_$_Register> get copyWith =>
+      __$$_RegisterCopyWithImpl<_$_Register>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String email, String password) login,
+    required TResult Function() logout,
+    required TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)
+        register,
+  }) {
+    return register(username, email, password, address, birtdays, noTelp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(String email, String password)? login,
+    TResult? Function()? logout,
+    TResult? Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
+  }) {
+    return register?.call(username, email, password, address, birtdays, noTelp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String email, String password)? login,
+    TResult Function()? logout,
+    TResult Function(String username, String email, String password,
+            String address, String birtdays, String noTelp)?
+        register,
+    required TResult orElse(),
+  }) {
+    if (register != null) {
+      return register(username, email, password, address, birtdays, noTelp);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Login value) login,
+    required TResult Function(_Logout value) logout,
+    required TResult Function(_Register value) register,
+  }) {
+    return register(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Login value)? login,
+    TResult? Function(_Logout value)? logout,
+    TResult? Function(_Register value)? register,
+  }) {
+    return register?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Login value)? login,
+    TResult Function(_Logout value)? logout,
+    TResult Function(_Register value)? register,
+    required TResult orElse(),
+  }) {
+    if (register != null) {
+      return register(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Register implements AuthEvent {
+  const factory _Register(
+      {required final String username,
+      required final String email,
+      required final String password,
+      required final String address,
+      required final String birtdays,
+      required final String noTelp}) = _$_Register;
+
+  String get username;
+  String get email;
+  String get password;
+  String get address;
+  String get birtdays;
+  String get noTelp;
+  @JsonKey(ignore: true)
+  _$$_RegisterCopyWith<_$_Register> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -450,6 +716,7 @@ mixin _$AuthState {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -459,6 +726,7 @@ mixin _$AuthState {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -468,6 +736,7 @@ mixin _$AuthState {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -478,6 +747,7 @@ mixin _$AuthState {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -487,6 +757,7 @@ mixin _$AuthState {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -496,6 +767,7 @@ mixin _$AuthState {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -561,6 +833,7 @@ class _$_Initial implements _Initial {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) {
     return initial();
   }
@@ -573,6 +846,7 @@ class _$_Initial implements _Initial {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) {
     return initial?.call();
   }
@@ -585,6 +859,7 @@ class _$_Initial implements _Initial {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -601,6 +876,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) {
     return initial(this);
   }
@@ -613,6 +889,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) {
     return initial?.call(this);
   }
@@ -625,6 +902,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -681,6 +959,7 @@ class _$_Loading implements _Loading {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) {
     return loading();
   }
@@ -693,6 +972,7 @@ class _$_Loading implements _Loading {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) {
     return loading?.call();
   }
@@ -705,6 +985,7 @@ class _$_Loading implements _Loading {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -721,6 +1002,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) {
     return loading(this);
   }
@@ -733,6 +1015,7 @@ class _$_Loading implements _Loading {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) {
     return loading?.call(this);
   }
@@ -745,6 +1028,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -827,6 +1111,7 @@ class _$_Failed implements _Failed {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) {
     return failed(errorMessage);
   }
@@ -839,6 +1124,7 @@ class _$_Failed implements _Failed {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) {
     return failed?.call(errorMessage);
   }
@@ -851,6 +1137,7 @@ class _$_Failed implements _Failed {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -867,6 +1154,7 @@ class _$_Failed implements _Failed {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) {
     return failed(this);
   }
@@ -879,6 +1167,7 @@ class _$_Failed implements _Failed {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) {
     return failed?.call(this);
   }
@@ -891,6 +1180,7 @@ class _$_Failed implements _Failed {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -996,6 +1286,7 @@ class _$_Authenticate implements _Authenticate {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) {
     return authenticate(name, email, profile);
   }
@@ -1008,6 +1299,7 @@ class _$_Authenticate implements _Authenticate {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) {
     return authenticate?.call(name, email, profile);
   }
@@ -1020,6 +1312,7 @@ class _$_Authenticate implements _Authenticate {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) {
     if (authenticate != null) {
@@ -1036,6 +1329,7 @@ class _$_Authenticate implements _Authenticate {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) {
     return authenticate(this);
   }
@@ -1048,6 +1342,7 @@ class _$_Authenticate implements _Authenticate {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) {
     return authenticate?.call(this);
   }
@@ -1060,6 +1355,7 @@ class _$_Authenticate implements _Authenticate {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) {
     if (authenticate != null) {
@@ -1127,6 +1423,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     required TResult Function(String name, String email, String profile)
         authenticate,
     required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
   }) {
     return unauthenticate();
   }
@@ -1139,6 +1436,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     TResult? Function(String errorMessage)? failed,
     TResult? Function(String name, String email, String profile)? authenticate,
     TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
   }) {
     return unauthenticate?.call();
   }
@@ -1151,6 +1449,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     TResult Function(String errorMessage)? failed,
     TResult Function(String name, String email, String profile)? authenticate,
     TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
     required TResult orElse(),
   }) {
     if (unauthenticate != null) {
@@ -1167,6 +1466,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     required TResult Function(_Failed value) failed,
     required TResult Function(_Authenticate value) authenticate,
     required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
   }) {
     return unauthenticate(this);
   }
@@ -1179,6 +1479,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     TResult? Function(_Failed value)? failed,
     TResult? Function(_Authenticate value)? authenticate,
     TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
   }) {
     return unauthenticate?.call(this);
   }
@@ -1191,6 +1492,7 @@ class _$_Unauthenticate implements _Unauthenticate {
     TResult Function(_Failed value)? failed,
     TResult Function(_Authenticate value)? authenticate,
     TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
     required TResult orElse(),
   }) {
     if (unauthenticate != null) {
@@ -1202,4 +1504,131 @@ class _$_Unauthenticate implements _Unauthenticate {
 
 abstract class _Unauthenticate implements AuthState {
   const factory _Unauthenticate() = _$_Unauthenticate;
+}
+
+/// @nodoc
+abstract class _$$_SuccessRegisterCopyWith<$Res> {
+  factory _$$_SuccessRegisterCopyWith(
+          _$_SuccessRegister value, $Res Function(_$_SuccessRegister) then) =
+      __$$_SuccessRegisterCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SuccessRegisterCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$_SuccessRegister>
+    implements _$$_SuccessRegisterCopyWith<$Res> {
+  __$$_SuccessRegisterCopyWithImpl(
+      _$_SuccessRegister _value, $Res Function(_$_SuccessRegister) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SuccessRegister implements _SuccessRegister {
+  const _$_SuccessRegister();
+
+  @override
+  String toString() {
+    return 'AuthState.successRegister()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SuccessRegister);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String errorMessage) failed,
+    required TResult Function(String name, String email, String profile)
+        authenticate,
+    required TResult Function() unauthenticate,
+    required TResult Function() successRegister,
+  }) {
+    return successRegister();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String errorMessage)? failed,
+    TResult? Function(String name, String email, String profile)? authenticate,
+    TResult? Function()? unauthenticate,
+    TResult? Function()? successRegister,
+  }) {
+    return successRegister?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String errorMessage)? failed,
+    TResult Function(String name, String email, String profile)? authenticate,
+    TResult Function()? unauthenticate,
+    TResult Function()? successRegister,
+    required TResult orElse(),
+  }) {
+    if (successRegister != null) {
+      return successRegister();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Failed value) failed,
+    required TResult Function(_Authenticate value) authenticate,
+    required TResult Function(_Unauthenticate value) unauthenticate,
+    required TResult Function(_SuccessRegister value) successRegister,
+  }) {
+    return successRegister(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Failed value)? failed,
+    TResult? Function(_Authenticate value)? authenticate,
+    TResult? Function(_Unauthenticate value)? unauthenticate,
+    TResult? Function(_SuccessRegister value)? successRegister,
+  }) {
+    return successRegister?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Failed value)? failed,
+    TResult Function(_Authenticate value)? authenticate,
+    TResult Function(_Unauthenticate value)? unauthenticate,
+    TResult Function(_SuccessRegister value)? successRegister,
+    required TResult orElse(),
+  }) {
+    if (successRegister != null) {
+      return successRegister(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessRegister implements AuthState {
+  const factory _SuccessRegister() = _$_SuccessRegister;
 }

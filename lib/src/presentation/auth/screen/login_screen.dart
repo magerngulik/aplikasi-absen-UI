@@ -3,14 +3,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_attandance/src/presentation/auth/screen/register_screen.dart';
 import 'package:new_attandance/src/presentation/auth/widget/q_button_access.dart';
 import 'package:new_attandance/src/presentation/auth/widget/q_button_auth.dart';
-import 'package:new_attandance/src/presentation/auth/widget/q_headLogo.dart';
+import 'package:new_attandance/src/presentation/auth/widget/q_head_logo.dart';
 
 import 'package:new_attandance/src/presentation/auth/widget/q_textfield_login.dart';
 import 'package:new_attandance/src/presentation/home/screen/home_screen.dart';
 import 'package:new_attandance/src/shared/bloc/theme/theme_cubit.dart';
 
+import '../../../shared/function/q_function.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../widget/q_dialog_error.dart';
 
@@ -28,7 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
-    // var w = MediaQuery.of(context).size.width;
     var auth = context.read<AuthBloc>();
 
     return BlocListener<AuthBloc, AuthState>(
@@ -134,12 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       },
                       loading: () {
-                        return SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
+                        return circularLoadingAuth(context);
                       },
                     );
                   },
@@ -148,7 +144,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 QButtonAcccess(
                   title: "Belum punya akun?",
                   head: "Register",
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const RegisterScreens()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 50.0,
@@ -158,4 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
     );
   }
+
+ 
 }

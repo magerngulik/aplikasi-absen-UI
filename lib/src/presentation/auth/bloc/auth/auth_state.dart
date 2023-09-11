@@ -10,4 +10,5 @@ class AuthState with _$AuthState {
       required String email,
       required String profile}) = _Authenticate;
   const factory AuthState.unauthenticate() = _Unauthenticate;
+  const factory AuthState.successRegister() = _SuccessRegister;
 }

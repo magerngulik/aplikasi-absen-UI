@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }, (r) {
         var source = r['data'];
         var user = source['user'];
-        var token = source['token'];
+        // var token = source['token'];
         String name = "";
         String email = "";
         String profile = "";
@@ -29,6 +29,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         emit(
             AuthState.authenticate(name: name, email: email, profile: profile));
+      });
+    });
+
+    on<_Register>((event, emit) async {
+      emit(const AuthState.loading());
+      var services = AuthServices();
+      var data = await services.doRegister(
+          name: event.username,
+          email: event.email,
+          password: event.password,
+          tanggalLahir: event.birtdays,
+          alamat: event.address,
+          nomorTelp: event.noTelp);
+      data.fold((l) {
+        emit(AuthState.failed(errorMessage: l));
+      }, (r) {
+        emit(const AuthState.successRegister());
       });
     });
 

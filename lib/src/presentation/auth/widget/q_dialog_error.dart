@@ -39,3 +39,12 @@ Future<dynamic> dialogError(BuildContext context, String errorMessage) {
     },
   );
 }
+
+Future<dynamic> dialogSuccess(BuildContext context, String errorMessage) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return QDialogError(errorMessage: errorMessage);
+    },
+  );
+}

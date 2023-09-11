@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 class MyBlocObserver extends BlocObserver {
