@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class QDialogError extends StatelessWidget {
   final String errorMessage;
@@ -10,11 +11,24 @@ class QDialogError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Info'),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      title: const Center(
+        child: Text(
+          'Info',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
-            Text(errorMessage),
+            Text(
+              errorMessage,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -26,8 +40,11 @@ class QDialogError extends StatelessWidget {
           },
           child: const Text("Ok"),
         ),
+        const SizedBox(
+          height: 25.0,
+        ),
       ],
-    );
+    ).animate().shake().fadeIn();
   }
 }
 

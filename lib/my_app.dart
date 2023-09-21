@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_attandance/src/presentation/auth/screen/login_screen.dart';
-import 'package:new_attandance/src/shared/bloc/theme/theme_cubit.dart';
-import 'package:new_attandance/src/shared/services/q_theme.dart';
+import 'src/shared/util/q_export.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -26,7 +22,7 @@ class _MyAppState extends State<MyApp> {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: state ? QTheme.isLight : QTheme.isDark,
-          home: const LoginScreen(),
+          home: const HomeScreen(),
         );
       },
     );

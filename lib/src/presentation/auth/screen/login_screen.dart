@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_attandance/src/presentation/auth/screen/register_screen.dart';
 import 'package:new_attandance/src/presentation/auth/widget/q_button_access.dart';
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var auth = context.read<AuthBloc>();
+    var theme = context.read<ThemeCubit>();
 
     return BlocListener<AuthBloc, AuthState>(
       bloc: auth,
@@ -57,10 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
           appBar: AppBar(
             actions: [
-              IconButton(
-                icon: const Icon(Icons.light),
-                onPressed: () {
-                  context.read<ThemeCubit>().changeTheme();
+              BlocBuilder<ThemeCubit, bool>(
+                bloc: theme,
+                builder: (context, state) {
+                  return IconButton(
+                    icon: Icon(state ? Icons.light_mode : Icons.dark_mode),
+                    onPressed: () {
+                      context.read<ThemeCubit>().changeTheme();
+                    },
+                  );
                 },
               )
             ],
@@ -160,6 +167,4 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
     );
   }
-
- 
 }

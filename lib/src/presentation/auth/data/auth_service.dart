@@ -29,6 +29,7 @@ class AuthServices {
 
       debugPrint(e.response!.statusMessage);
       debugPrint(e.response!.data);
+
       return Left(e.toString());
     }
   }

@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:new_attandance/src/presentation/auth/data/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -11,6 +15,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_Login>((event, emit) async {
       emit(const AuthState.loading());
       var services = AuthServices();
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
       var data =
           await services.doLogin(email: event.email, password: event.password);
       data.fold((l) {
@@ -18,7 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }, (r) {
         var source = r['data'];
         var user = source['user'];
-        // var token = source['token'];
+        var token = source['token'];
         String name = "";
         String email = "";
         String profile = "";
@@ -26,7 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         name = user['name'];
         email = user['email'];
         profile = user['avatar'];
-
+        prefs.setString('token', token);
         emit(
             AuthState.authenticate(name: name, email: email, profile: profile));
       });
