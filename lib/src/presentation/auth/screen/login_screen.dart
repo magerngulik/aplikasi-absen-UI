@@ -2,7 +2,6 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_attandance/src/presentation/auth/screen/register_screen.dart';
 import 'package:new_attandance/src/presentation/auth/widget/q_button_access.dart';
