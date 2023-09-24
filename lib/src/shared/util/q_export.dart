@@ -9,3 +9,5 @@ export 'package:new_attandance/src/shared/services/bloc_observer.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:new_attandance/src/presentation/home/screen/home_screen.dart';
 export 'package:new_attandance/src/presentation/home/widget/q_card_home_page.dart';
+export 'package:dio/dio.dart';
+export 'package:new_attandance/src/shared/services/base_url.dart';

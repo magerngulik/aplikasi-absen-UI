@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:new_attandance/src/shared/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AttandanceService {
@@ -10,7 +11,7 @@ class AttandanceService {
     required this.dioServices,
   });
 
-  String baseUrl = "http://attendance-app.test/api/attendance";
+  String baseUrl = "$baseUrlX/api/attendance";
 
   Future<Either<String, Map<String, dynamic>>> cekLocation(
       {required String latitude,
@@ -42,6 +43,8 @@ class AttandanceService {
       {String? token}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? dataToken = prefs.getString('token');
+    debugPrint("token => $dataToken");
+    debugPrint("url => $baseUrl");
     try {
       var response = await dioServices.get("$baseUrl/current",
           options: Options(headers: {

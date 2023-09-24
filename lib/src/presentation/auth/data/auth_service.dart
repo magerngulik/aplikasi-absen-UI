@@ -1,11 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+
+import '../../../shared/util/q_export.dart';
 
 class AuthServices {
   Future<Either<String, Map<String, dynamic>>> doLogin(
       {required String email, required String password}) async {
-    String baseUrl = "http://127.0.0.1:8000";
+    String baseUrl = baseUrlX;
+    debugPrint("email => $email");
+    debugPrint("password => $password");
     try {
       var response = await Dio().post(
         "$baseUrl/api/auth/login",
@@ -23,12 +25,13 @@ class AuthServices {
       debugPrint(obj.toString());
       return Right(obj);
     } on DioException catch (e) {
-      if (e.response!.statusCode == 401) {
-        return Left(e.response!.data['message']);
+      if (e.response != null) {
+        if (e.response!.statusCode == 401) {
+          return Left(e.response!.data['message']);
+        }
+        debugPrint(e.response!.statusMessage);
+        debugPrint(e.response!.data);
       }
-
-      debugPrint(e.response!.statusMessage);
-      debugPrint(e.response!.data);
 
       return Left(e.toString());
     }

@@ -1,4 +1,10 @@
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:new_attandance/src/presentation/auth/widget/q_dialog_error.dart';
+import 'package:new_attandance/src/presentation/home/bloc/location/location_cubit.dart';
+import 'package:new_attandance/src/presentation/home/bloc/user_status/user_status_cubit.dart';
+import 'package:new_attandance/src/presentation/home/screen/q_absen.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 import '../../../shared/util/q_export.dart';
 
@@ -12,32 +18,109 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double latitude = 0;
+  double longitude = 0;
+  bool locationLoaded = false;
+  bool inArea = false;
+  String deviceName = "";
+
   @override
   void initState() {
     super.initState();
+    getLocation().then((_) {});
+    context.read<UserStatusCubit>().cekData();
+    deviceInfo();
+  }
+
+  Future<void> getLocation() async {
+    Position position = await Geolocator.getCurrentPosition();
+    latitude = position.latitude;
+    longitude = position.longitude;
+    locationLoaded = true;
+    setState(() {});
+    debugPrint("out latitude = $latitude longitude = $longitude");
+  }
+
+  deviceInfo() async {
+    final deviceInfoPlugin = DeviceInfoPlugin();
+    final deviceInfo = await deviceInfoPlugin.androidInfo;
+    final anroidInfo = "${deviceInfo.brand} ${deviceInfo.model}";
+    setState(() {
+      deviceName = anroidInfo;
+    });
+  }
+
+  onRefrest() {
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     var auth = context.read<AuthBloc>();
     var theme = context.read<ThemeCubit>();
-    return BlocListener<AuthBloc, AuthState>(
-      bloc: auth,
-      listener: (context, state) {
-        state.maybeMap(
-          orElse: () {},
-          unauthenticate: (value) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
+    var location = context.read<LocationCubit>();
+    var userStatus = context.read<UserStatusCubit>();
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          bloc: auth,
+          listener: (context, state) {
+            state.maybeMap(
+              orElse: () {},
+              unauthenticate: (value) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
             );
           },
-        );
-      },
+        ),
+        BlocListener<LocationCubit, LocationState>(
+          bloc: location,
+          listener: (context, state) {
+            state.maybeMap(
+              orElse: () {},
+              inLocation: (value) {
+                setState(() {
+                  inArea = true;
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => QAbsen(
+                          latitude: latitude,
+                          longitude: longitude,
+                          deviceName: deviceName)),
+                );
+              },
+              outLocation: (value) {
+                dialogError(context, "Di luar kawansan kantor");
+                setState(() {
+                  inArea = false;
+                });
+              },
+              failed: (value) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+            );
+          },
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Home Screen"),
           actions: [
+            IconButton(
+              onPressed: () => onRefrest(),
+              icon: const Icon(
+                Icons.refresh,
+                size: 24.0,
+              ),
+            ),
             BlocBuilder<ThemeCubit, bool>(
               bloc: theme,
               builder: (context, state) {
@@ -158,7 +241,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         elevation: 2,
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 5.0),
                           child: Text(
                             "Waktu kerja yang tersisa: 03:20",
                             style: TextStyle(
@@ -170,27 +254,101 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          onPressed: () {},
-                          child: const Text(
-                            "CHECK OUT",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                            ),
-                          ),
-                        ),
+                      BlocBuilder<UserStatusCubit, UserStatusState>(
+                        bloc: userStatus,
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () {
+                              return Container();
+                            },
+                            signIn: () {
+                              return SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    debugPrint("Nama Device =$deviceName");
+                                    location.checkLocation(
+                                        latitude: latitude,
+                                        longitude: longitude);
+                                    setState(() {});
+                                    if (inArea = true) {
+                                      debugPrint("aman");
+                                    } else {
+                                      debugPrint("tidak aman");
+                                    }
+                                  },
+                                  child: const Text(
+                                    "CHECK IN",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            signOut: (data) {
+                              return SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    location.checkLocation(
+                                        latitude: latitude,
+                                        longitude: longitude);
+                                    setState(() {});
+                                    if (inArea = true) {
+                                      debugPrint("aman");
+                                    } else {
+                                      debugPrint("tidak aman");
+                                    }
+                                  },
+                                  child: const Text(
+                                    "CHECK OUT",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            complate: (data) {
+                              return SizedBox(
+                                height: 50,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  onPressed: null,
+                                  child: const Text(
+                                    "PEKERJAAN TELAH SELESAI",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
-              ),
+              )
+                  .animate()
+                  .slideX(delay: const Duration(milliseconds: 2))
+                  .fadeIn(),
               const SizedBox(
                 height: 20.0,
               ),
@@ -208,15 +366,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       time: "18:20 am",
                       subtitle: "Go Home")
                 ],
-              ),
+              ).animate().slideX(delay: 150.ms, begin: 0.5).fadeIn(),
               const SizedBox(
                 height: 20.0,
               ),
               const CardHomePage(
-                  title: "Working Time",
-                  icon: Icons.lock_clock,
-                  time: "08:00 am",
-                  subtitle: "Your Late to home")
+                      title: "Working Time",
+                      icon: Icons.lock_clock,
+                      time: "08:00 am",
+                      subtitle: "Your Late to home")
+                  .animate()
+                  .slideX(delay: 200.ms, begin: -0.5)
+                  .fadeIn()
             ],
           ),
         ),

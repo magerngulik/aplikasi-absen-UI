@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
           theme: state ? QTheme.isLight : QTheme.isDark,
-          home: const HomeScreen(),
+          home: const LoginScreen(),
         );
       },
     );

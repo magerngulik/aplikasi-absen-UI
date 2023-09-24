@@ -57,22 +57,23 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
       child: Scaffold(
-          appBar: AppBar(
-            actions: [
-              BlocBuilder<ThemeCubit, bool>(
-                bloc: theme,
-                builder: (context, state) {
-                  return IconButton(
-                    icon: Icon(state ? Icons.light_mode : Icons.dark_mode),
-                    onPressed: () {
-                      context.read<ThemeCubit>().changeTheme();
-                    },
-                  );
-                },
-              )
-            ],
-          ),
-          body: Container(
+        appBar: AppBar(
+          actions: [
+            BlocBuilder<ThemeCubit, bool>(
+              bloc: theme,
+              builder: (context, state) {
+                return IconButton(
+                  icon: Icon(state ? Icons.light_mode : Icons.dark_mode),
+                  onPressed: () {
+                    context.read<ThemeCubit>().changeTheme();
+                  },
+                );
+              },
+            )
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -164,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
